@@ -8,12 +8,13 @@ import { FcGoogle } from 'react-icons/fc';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
 
-
 export default function Login() {
   const [isRememberPasswordChecked, setIsRememberPasswordChecked] =
     useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [usernameError, setUsernameError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [keyboardInput, setKeyboardInput] = useState('');
 
@@ -32,6 +33,26 @@ export default function Login() {
     }
   };
 
+  const validateForm = () => {
+    let isValid = true;
+
+    if (!username) {
+      setUsernameError('Username is required');
+      isValid = false;
+    } else {
+      setUsernameError('');
+    }
+
+    if (!password) {
+      setPasswordError('Password is required');
+      isValid = false;
+    } else {
+      setPasswordError('');
+    }
+
+    return isValid;
+  };
+
   const onUsernameChange = (event) => {
     setUsername(event.target.value);
   };
@@ -46,13 +67,15 @@ export default function Login() {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    const dataToSend = {
-      username,
-      password,
-      rememberPassword: isRememberPasswordChecked,
-    };
-    // just to simulate the data will send to the backend
-    console.log('Form Successfully Submitted', dataToSend);
+    if (validateForm()) {
+      const dataToSend = {
+        username,
+        password,
+        rememberPassword: isRememberPasswordChecked,
+      };
+      // just to simulate the data will send to the backend
+      console.log('Form Successfully Submitted', dataToSend);
+    }
   };
 
   return (
@@ -83,6 +106,9 @@ export default function Login() {
               onFocus={handleFocus}
               autoFocus
             />
+            {usernameError && (
+              <p className='text-sm italic text-red-500'>{usernameError}</p>
+            )}
           </div>
 
           <div className='flex flex-col'>
@@ -109,6 +135,9 @@ export default function Login() {
                 )}
               </button>
             </div>
+            {passwordError && (
+              <p className='text-sm italic text-red-500'>{passwordError}</p>
+            )}
           </div>
           <div className='flex items-center mt-2'>
             <input
