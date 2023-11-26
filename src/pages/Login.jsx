@@ -6,39 +6,30 @@ import loginBackgroundImg from '../assets/imgs/blue-bg.jpg';
 export default function Login() {
   const [isRememberPasswordChecked, setIsRememberPasswordChecked] =
     useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const onUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const onPasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
 
   const handleRememberPassword = (event) => {
-    console.log('test > handleRememberPassword');
     setIsRememberPasswordChecked(event.target.checked);
   };
 
-  console.log(isRememberPasswordChecked);
-
-  const handleSubmit = (event) => {
+  const onSubmit = (event) => {
     event.preventDefault();
-    console.log('form submitted');
-    // const dataToSend = {
-    // ... other form data
-    //  rememberPassword: isRememberPasswordChecked,
-    //
-    // };
-    // console.log(JSON.stringify(dataToSend, null, 2));
-    // // send data to backend here
-  };
-
-  const onRegisterNewUser = (event) => {
-    event.preventDefault();
-    console.log('register new user');
-  };
-
-  const onGoogleLogin = (event) => {
-    event.preventDefault();
-    console.log('google login');
-  };
-
-  const onFacebookLogin = (event) => {
-    event.preventDefault();
-    console.log('google login');
+    const dataToSend = {
+      username,
+      password,
+      rememberPassword: isRememberPasswordChecked,
+    };
+    // just to simulate the data will send to the backend
+    console.log('Form Successfully Submitted', dataToSend);
   };
 
   return (
@@ -51,21 +42,15 @@ export default function Login() {
 
       <div className='flex items-center justify-center h-full'>
         <form
-          onSubmit={handleSubmit}
+          onSubmit={onSubmit}
           className='relative max-w-[400px] w-full mx-auto bg-white p-8'
         >
           <h2 className='py-4 text-4xl font-bold text-center'>User Login</h2>
           <div className='flex justify-between py-8'>
-            <p
-              onChange={onFacebookLogin}
-              className='relative flex items-center px-6 py-2 font-semibold transition-transform duration-500 transform border shadow-lg cursor-pointer hover:scale-110'
-            >
+            <p className='relative flex items-center px-6 py-2 font-semibold transition-transform duration-500 transform border shadow-lg cursor-pointer hover:scale-110'>
               <AiFillFacebook className='mr-2' /> Facebook
             </p>
-            <p
-              onChange={onGoogleLogin}
-              className='relative flex items-center px-6 py-2 font-semibold transition-transform duration-500 transform border shadow-lg cursor-pointer hover:scale-110'
-            >
+            <p className='relative flex items-center px-6 py-2 font-semibold transition-transform duration-500 transform border shadow-lg cursor-pointer hover:scale-110'>
               <FcGoogle className='mr-2' /> Google
             </p>
           </div>
@@ -75,6 +60,8 @@ export default function Login() {
               className='relative p-2 bg-gray-100 border'
               type='text'
               placeholder='Type your username here'
+              value={username}
+              onChange={onUsernameChange}
             />
           </div>
           <div className='flex flex-col '>
@@ -83,15 +70,16 @@ export default function Login() {
               className='relative p-2 bg-gray-100 border'
               type='password'
               placeholder='Type your password here'
+              value={password}
+              onChange={onPasswordChange}
             />
           </div>
           <div className='flex items-center mt-2'>
             <input
               type='checkbox'
-              id='rememberPasswordCheckbox'
+              className='mr-2'
               checked={isRememberPasswordChecked}
               onChange={handleRememberPassword}
-              className='mr-2'
             />
             <label htmlFor='rememberPasswordCheckbox' className='text-gray-800'>
               Remember Me
@@ -106,7 +94,6 @@ export default function Login() {
           <p className='mt-8 text-center'>
             Not a member?
             <a
-              onChange={onRegisterNewUser}
               href='#register-new-user'
               className='ml-2 text-blue-900 cursor-pointer hover:text-blue-700 text-semibold'
             >
