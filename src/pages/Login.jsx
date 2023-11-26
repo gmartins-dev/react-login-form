@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { AiFillFacebook } from 'react-icons/ai';
+import {
+  AiFillFacebook,
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+} from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import loginBackgroundImg from '../assets/imgs/blue-bg.jpg';
 
@@ -8,6 +12,18 @@ export default function Login() {
     useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    if (isPasswordVisible) {
+      setIsPasswordVisible(false);
+    } else {
+      setIsPasswordVisible(true);
+      setTimeout(() => {
+        setIsPasswordVisible(false);
+      }, 2000);
+    }
+  };
 
   const onUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -57,22 +73,36 @@ export default function Login() {
           <div className='flex flex-col mb-4'>
             <label>Username</label>
             <input
-              className='relative p-2 bg-gray-100 border'
+              className='relative w-full p-2 bg-gray-100 border'
               type='text'
-              placeholder='Type your username here'
               value={username}
               onChange={onUsernameChange}
+              placeholder='Type your username here'
             />
           </div>
-          <div className='flex flex-col '>
+
+          <div className='flex flex-col'>
             <label>Password</label>
-            <input
-              className='relative p-2 bg-gray-100 border'
-              type='password'
-              placeholder='Type your password here'
-              value={password}
-              onChange={onPasswordChange}
-            />
+            <div className='relative flex'>
+              <input
+                className='relative flex-grow p-2 bg-gray-100 border'
+                type={isPasswordVisible ? 'text' : 'password'}
+                value={password}
+                onChange={onPasswordChange}
+                placeholder='Type your password here'
+              />
+              <button
+                type='button'
+                className='absolute transform -translate-y-1/2 right-2 top-1/2'
+                onClick={togglePasswordVisibility}
+              >
+                {isPasswordVisible ? (
+                  <AiOutlineEyeInvisible />
+                ) : (
+                  <AiOutlineEye />
+                )}
+              </button>
+            </div>
           </div>
           <div className='flex items-center mt-2'>
             <input
