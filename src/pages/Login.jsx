@@ -52,7 +52,7 @@ export default function Login() {
       <div className='flex items-center justify-center h-full'>
         <form
           onSubmit={handleSubmit}
-          className='max-w-[400px] w-full mx-auto bg-white p-8'
+          className='relative max-w-[400px] w-full mx-auto bg-white p-8'
         >
           <h2 className='py-4 text-4xl font-bold text-center'>User Login</h2>
           <div className='flex justify-between py-8'>
@@ -71,13 +71,18 @@ export default function Login() {
           </div>
           <div className='flex flex-col mb-4'>
             <label>Username</label>
-            <input className='relative p-2 bg-gray-100 border' type='text' />
+            <input
+              className='relative p-2 bg-gray-100 border'
+              type='text'
+              placeholder='Type your username here'
+            />
           </div>
           <div className='flex flex-col '>
             <label>Password</label>
             <input
               className='relative p-2 bg-gray-100 border'
               type='password'
+              placeholder='Type your password here'
             />
           </div>
           <div className='flex items-center mt-2'>
@@ -103,7 +108,7 @@ export default function Login() {
             <a
               onChange={onRegisterNewUser}
               href='#register-new-user'
-              className='ml-2 text-blue-900 cursor-pointer hover:bg-blue-700 text-semibold'
+              className='ml-2 text-blue-900 cursor-pointer hover:text-blue-700 text-semibold'
             >
               Sign up now
             </a>
