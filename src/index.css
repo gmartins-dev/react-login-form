@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  @apply bg-[#000211];
+  background-image: url('../src//assets/imgs/blue-bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}

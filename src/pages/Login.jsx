@@ -5,7 +5,9 @@ import {
   AiOutlineEyeInvisible,
 } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
-import loginBackgroundImg from '../assets/imgs/blue-bg.jpg';
+import Keyboard from 'react-simple-keyboard';
+import 'react-simple-keyboard/build/css/index.css';
+
 
 export default function Login() {
   const [isRememberPasswordChecked, setIsRememberPasswordChecked] =
@@ -13,6 +15,11 @@ export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [keyboardInput, setKeyboardInput] = useState('');
+
+  const handleFocus = (event) => {
+    setKeyboardInput(event.target.name);
+  };
 
   const togglePasswordVisibility = () => {
     if (isPasswordVisible) {
@@ -49,14 +56,8 @@ export default function Login() {
   };
 
   return (
-    <div className='relative w-full h-screen bg-zinc-900/90'>
-      <img
-        className='absolute object-cover w-full h-full mix-blend-overlay'
-        src={loginBackgroundImg}
-        alt='login background image'
-      />
-
-      <div className='flex items-center justify-center h-full'>
+    <div className='relative w-full h-full bg-transparent'>
+      <div className='flex items-center justify-center h-full mt-8'>
         <form
           onSubmit={onSubmit}
           className='relative max-w-[400px] w-full mx-auto bg-white p-8'
@@ -73,11 +74,14 @@ export default function Login() {
           <div className='flex flex-col mb-4'>
             <label>Username</label>
             <input
+              name='username'
               className='relative w-full p-2 bg-gray-100 border'
               type='text'
+              placeholder='Type your username here'
               value={username}
               onChange={onUsernameChange}
-              placeholder='Type your username here'
+              onFocus={handleFocus}
+              autoFocus
             />
           </div>
 
@@ -85,11 +89,13 @@ export default function Login() {
             <label>Password</label>
             <div className='relative flex'>
               <input
+                name='password'
                 className='relative flex-grow p-2 bg-gray-100 border'
+                placeholder='Type your password here'
                 type={isPasswordVisible ? 'text' : 'password'}
                 value={password}
                 onChange={onPasswordChange}
-                placeholder='Type your password here'
+                onFocus={handleFocus}
               />
               <button
                 type='button'
@@ -131,6 +137,20 @@ export default function Login() {
             </a>
           </p>
         </form>
+      </div>
+      <div className='flex items-center justify-center w-full max-w-5xl p-8 mx-auto bg-transparent'>
+        <Keyboard
+          onKeyPress={(button) => console.log(button)}
+          inputName={keyboardInput}
+          onChangeAll={(inputs) => {
+            if (inputs.username !== undefined) {
+              setUsername(inputs.username);
+            }
+            if (inputs.password !== undefined) {
+              setPassword(inputs.password);
+            }
+          }}
+        />
       </div>
     </div>
   );
