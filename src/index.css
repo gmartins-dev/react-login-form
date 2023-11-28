@@ -5,6 +5,10 @@
 body {
   @apply bg-[#000211];
   background-image: url('../src/assets/imgs/blue-bg.jpg');
-  background-repeat: no-repeat;
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
