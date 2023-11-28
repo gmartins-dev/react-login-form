@@ -69,7 +69,7 @@ This project was developed with the following technologies:
 If you want to run the project on your local machine, just follow the steps below:
 
 ```bash
-$ git clone https://github.com/gmartins-dev/nextjs14-car-hire
+$ git clone https://github.com/gmartins-dev/react-login-form
 
 # Install the dependencies
 
@@ -85,25 +85,23 @@ $ yarn run dev or npm run dev or pnpm run dev (recommended)
 
 
 
-1. Set a design system and better styling
+1. Form:
 
-2. Add dark/light themes
+  1.1 use masks and validations
 
-3. Forms:
+  1.2 maybe use a third library like:  Formik or React Hook Forms
 
-  3.1 define what fields are required or optional
+  1.3 implement the social login functionality
 
-  3.2 use masks and validations
+  1.4 implement a recovery password option
 
-  3.3 maybe use a third library like:  Formik or React Hook Forms
+2. Implement tests:
 
-4. Implement tests:
+  2.1 unit tests
 
-  4.1 unit tests
+  2.2 integration tests
 
-  4.2 integration tests
-
-  4.3 end-to-end test
+  2.3 end-to-end test
 
 
 
