@@ -11,7 +11,7 @@
 
 <h1  align="center">
 
-🖥 Simple Register Form using React and Tailwind 📱
+🖥 Simple Register Form using React & Tailwind 📱
 
 </h1>
 
