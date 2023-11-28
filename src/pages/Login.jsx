@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import {
-  AiFillFacebook,
-  AiOutlineEye,
-  AiOutlineEyeInvisible,
-} from 'react-icons/ai';
+import { AiFillFacebook } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
+import VisibilityToggle from '../components/utils/VisibilityToggle';
 
 export default function Login() {
   const [isRememberPasswordChecked, setIsRememberPasswordChecked] =
@@ -123,17 +120,10 @@ export default function Login() {
                 onChange={onPasswordChange}
                 onFocus={handleFocus}
               />
-              <button
-                type='button'
-                className='absolute transform -translate-y-1/2 right-2 top-1/2'
-                onClick={togglePasswordVisibility}
-              >
-                {isPasswordVisible ? (
-                  <AiOutlineEyeInvisible />
-                ) : (
-                  <AiOutlineEye />
-                )}
-              </button>
+              <VisibilityToggle
+                isPasswordVisible={isPasswordVisible}
+                togglePasswordVisibility={togglePasswordVisibility}
+              />
             </div>
             {passwordError && (
               <p className='text-sm italic text-red-500'>{passwordError}</p>
